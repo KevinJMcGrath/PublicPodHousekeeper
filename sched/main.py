@@ -8,7 +8,7 @@ def run_sched():
     schedule.every().sunday.at("02:00").do(email_check.disable_users_noncorp_emails)
     schedule.every().sunday.at("03:00").do(kyc.report_kyc_users)
 
-    while(True):
+    while True:
         schedule.run_pending()
         time.sleep(1)
 
