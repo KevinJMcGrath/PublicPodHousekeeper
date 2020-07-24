@@ -1,17 +1,42 @@
 {
-  "import_path": "",
-  "pod_company_name": "Symphony Community POD",
-  "bot_config": {
-    "bot_username": "bot_name_here",
-    "auth_type": "JWT",
-    "auth_host": "https://develop.symphony.com",
-    "auth_port": "443",
-    "api_host": "https://develop.symphony.com",
-    "api_port": "443",
-    "secrets_folder": "keys",
-    "public_key_filename": "pub.pem",
-    "private_key_filename": "priv.pem"
-  },
+    "bots": [
+    {
+      "name": "public",
+      "bot_username": "public_pod_bot",
+      "auth_type": "JWT",
+      "auth_host": "https://<subdomain>.symphony.com",
+      "auth_port": "443",
+      "api_host": "https://<subdomain>.symphony.com",
+      "api_port": "443",
+      "secrets_folder": "keys/public",
+      "public_key_filename": "pubbot_pub.pem",
+      "private_key_filename": "pubbot_priv.pem"
+    },
+    {
+      "name": "corp",
+      "bot_username": "corp_pod_bot",
+      "auth_type": "JWT",
+      "auth_host": "https://<subdomain>.symphony.com",
+      "auth_port": "443",
+      "api_host": "https://<subdomain>.symphony.com",
+      "api_port": "443",
+      "secrets_folder": "keys/corp",
+      "public_key_filename": "corpbot_pub.pem",
+      "private_key_filename": "corpbot_priv.pem"
+    },
+    {
+      "name": "dev",
+      "bot_username": "dev_pod_bot",
+      "auth_type": "JWT",
+      "auth_host": "https://<subdomain>.symphony.com",
+      "auth_port": "443",
+      "api_host": "https://<subdomain>.symphony.com",
+      "api_port": "443",
+      "secrets_folder": "keys/dev",
+      "public_key_filename": "devbot_pub.pem",
+      "private_key_filename": "devbot_priv.pem"
+    }
+  ],
   "salesforce": {
     "username": "my.user@domain.com",
     "password": "P@ssw0rd1",
@@ -22,6 +47,7 @@
     "log_to_file": false,
     "log_path": "./logs",
     "verbose": true
-  }
+  },
+  "notification_stream": "stream_id"
 
 }
