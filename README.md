@@ -6,7 +6,9 @@
 
 - Clone the repo 
 - Create a config.json in the root following the pattern shown in config.json.sample
-- Create a keys/public and keys/corp folder and place the RSA keys for the respective bot in the folders
+- Create a folder for the private RSA keys for the bots on corp and public
+- Create a secret on GKE that contains the bot private keys and config.json
+    - E.g. `kubectl create secret generic public-housekeeper-prod --from-file=./config.json --from-file=./keys/public/pubbot_priv.pem --from-file=./keys/corp/ares_priv.pem`
 - Use the included DOCKERFILE to spin up the container
 
 ## Features
