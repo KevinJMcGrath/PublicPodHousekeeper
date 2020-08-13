@@ -1,0 +1,33 @@
+# https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod
+
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: pub-housekeepr-prod
+  labels:
+    app: pub-housekeepr-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pub-housekeepr-prod
+  template:
+    metadata:
+      labels:
+        app: pub-housekeepr-prod
+    spec:
+      volumes:
+        - name: bot-config
+          secret:
+            secretName: public-housekeeper-prod
+
+      containers:
+        - image: gcr.io/sym-bizops-bots/pub-housekeepr-prod:0.1
+          name: pub-housekeepr
+          env:
+            - name: DEPLOY_TYPE
+              value: prod
+          volumeMounts:
+            - name: bot-config
+              mountPath: "/etc/public_housekeeper/bot_config"
+              readOnly: true
