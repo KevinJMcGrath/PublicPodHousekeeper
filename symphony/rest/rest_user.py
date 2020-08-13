@@ -1,8 +1,5 @@
-from base64 import b64encode
-
 import symphony.rest.endpoints as sym_ep
 
-from models.security import Passwords
 from symphony.api_base import APIBase
 
 
@@ -64,16 +61,6 @@ class User(APIBase):
             },
             "roles": ["INDIVIDUAL"]
         }
-
-        if password_set:
-            ps = {
-                "hSalt": b64encode(password_set.user_password_salt).decode('utf-8'),
-                "hPassword": b64encode(password_set.user_password_hash).decode('utf-8'),
-                "khSalt": b64encode(password_set.km_password_salt).decode('utf-8'),
-                "khPassword": b64encode(password_set.km_password_hash).decode('utf-8')
-            }
-
-            user["password"] = ps
 
         ep = self.get_endpoint(sym_ep.create_user())
 
