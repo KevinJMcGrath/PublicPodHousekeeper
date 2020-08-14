@@ -1,5 +1,8 @@
 FROM python:3.8-slim-buster
 
+RUN useradd -ms /bin/bash appuser
+USER appuser
+
 MAINTAINER Kevin McGrath "kevin.mcgrath@symphony.com"
 
 # Create the venv for dependencies
