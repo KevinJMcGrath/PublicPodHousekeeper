@@ -2,6 +2,7 @@ import symphony.session
 
 from symphony.rest.rest_admin import Admin
 from symphony.rest.rest_info_barriers import InfoBarriers
+from symphony.rest.rest_message import Messaging
 from symphony.rest.rest_user import User
 
 
@@ -16,3 +17,4 @@ class BotClient:
         self.Admin = Admin(self.session)
         self.InfoBarriers = InfoBarriers(self.session)
         self.User = User(self.session)
+        self.Messaging = Messaging(self.session)

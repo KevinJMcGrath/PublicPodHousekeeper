@@ -2,6 +2,8 @@ import jsonpickle
 import logging
 import requests
 
+from requests_toolbelt import MultipartEncoder
+
 from .session import Session
 
 
@@ -33,6 +35,10 @@ class APIBase:
             elif method.lower() == 'post':
                 body_str = jsonpickle.encode(body_object, unpicklable=False)
                 response = self.session.http_session.post(endpoint, data=body_str, headers=self.session.get_rest_headers())
+            elif method.lower() == 'postv2':
+                encoder = MultipartEncoder(fields=body_object)
+                response = self.session.http_session.post(endpoint, data=encoder,
+                                                          headers=self.session.get_rest_headers(encoder.content_type))
 
             status_code = response.status_code
             if response.status_code // 100 != 2:

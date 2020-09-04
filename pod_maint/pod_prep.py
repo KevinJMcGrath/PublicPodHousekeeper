@@ -3,8 +3,8 @@ import jsonpickle
 from datetime import datetime, timedelta
 from pathlib import Path
 
-import utility
 import pod_maint
+import pod_maint.utility as utility
 
 from pod_maint.denied_persons import DeniedPersonsCollection
 from symphony import bot_clients

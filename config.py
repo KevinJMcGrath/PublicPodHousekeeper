@@ -24,6 +24,7 @@ if deploy_type == 'prod':
 
 
 salesforce = _config['salesforce']
+corp_stream_id = _config['notification_stream']
 
 LogConfig = LogType(_config['logging'])
 

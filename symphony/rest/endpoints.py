@@ -37,9 +37,9 @@ def create_im(exclude_bot: bool = False):
     return im_ep
 
 
-def send_message(stream_id: str, version: int=2):
+def send_message(stream_id: str):
     s_id = util.format_symphony_stream_id(stream_id)
-    return f'agent/v{str(version)}/stream/{s_id}/message/create'
+    return f'agent/v4/stream/{s_id}/message/create'
 
 
 def create_user():

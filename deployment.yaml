@@ -22,7 +22,7 @@ spec:
             secretName: public-housekeeper-prod
 
       containers:
-        - image: gcr.io/sym-bizops-bots/pub-housekeepr-prod:0.1
+        - image: gcr.io/sym-bizops-bots/public-housekeeper-prod:1.0
           name: pub-housekeepr
           env:
             - name: DEPLOY_TYPE

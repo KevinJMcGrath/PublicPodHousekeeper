@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 
-from pod_maint import pod_prep, public_pod_users
-from symphony import bot_clients
+import config
+
+from pod_maint import pod_prep, public_pod_users, utility
+from symphony import BotClient, bot_clients
 
 def disable_unverified_users(prior_days: int=7):
     if prior_days == -1:
@@ -15,7 +17,8 @@ def disable_unverified_users(prior_days: int=7):
 
     users_disabled = []
     users_failed = []
-    public_bot = bot_clients['public']
+    public_bot: BotClient = bot_clients['public']
+    corp_bot: BotClient = bot_clients['corp']
 
     for user in public_pod_users:
         uid = user['userSystemInfo']['id']
@@ -25,7 +28,20 @@ def disable_unverified_users(prior_days: int=7):
             if not last_login_date:
                 public_bot.User.disable_user(uid)
                 users_disabled.append(user)
-        except:
+        except Exception as ex:
             users_failed.append(user)
 
-    return users_disabled, users_failed
+    stream_id = config.corp_stream_id
+
+    if users_disabled:
+        users_disabled_msg = 'Unverified Users Disabled'
+        att = utility.build_csv_attachment('users_disabled', users_disabled)
+        corp_bot.Messaging.send_housekeeper_report(stream_id=stream_id, message=users_disabled_msg, attachment=att)
+    else:
+        users_disabled_msg = 'Unverified Users Disabled: None'
+        corp_bot.Messaging.send_housekeeper_report(stream_id=stream_id, message=users_disabled_msg)
+
+    if users_failed:
+        users_failed_msg = 'Unverified Users Disabled (Failed)'
+        att = utility.build_csv_attachment('users_disabled_failed', users_failed)
+        corp_bot.Messaging.send_housekeeper_report(stream_id=stream_id, message=users_failed_msg, attachment=att)

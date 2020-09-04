@@ -46,7 +46,7 @@ class User(APIBase):
         return self.get(ep)
 
     def create_symphony_user(self, first_name: str, last_name: str, email: str, username: str, company_name: str,
-                             title: str = None,department: str = None, password_set: Passwords = None):
+                             title: str = None,department: str = None, password_set = None):
         user = {
             "userAttributes": {
                 "accountType": "NORMAL",
